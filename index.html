@@ -79,14 +79,24 @@
     }
 
     input {
-        flex: 1;
-        padding: 14px 18px;
-        font-size: 1rem;
-        outline: none;
-        border: none;
-        background: transparent;
-        color: white;
-    }
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: white;
+
+    /* 🔥 FIX teks terlalu panjang */
+    white-space: nowrap;
+    overflow-x: auto;
+    text-overflow: ellipsis;
+    scrollbar-width: none; /* Firefox */
+}
+
+    input::-webkit-scrollbar {
+        display: none; /* Safari / Chrome / iPhone */
+}
 
     input::placeholder {
         color: rgba(255,255,255,0.75);
