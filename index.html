@@ -1,37 +1,13 @@
-1 file changed
-+161
--115
-lines changed
-Search within code
- 
-‎index.html‎
-+161
--115
-Lines changed: 161 additions & 115 deletions
-Original file line number	Diff line number	Diff line change
-@@ -1,121 +1,163 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Downloader TikTok & Facebook</title>
-    <style>
-        /* === Global Theme === */
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: linear-gradient(135deg, #4d00ff, #ff00c8);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: white;
-        }
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Downloader TikTok & Facebook</title>
+
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
     * {
         margin: 0;
@@ -40,10 +16,6 @@ Original file line number	Diff line number	Diff line change
         font-family: "Poppins", sans-serif;
     }
 
-        header {
-            padding: 40px 20px 10px;
-            text-align: center;
-        }
     body {
         min-height: 100vh;
         background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
@@ -56,27 +28,12 @@ Original file line number	Diff line number	Diff line change
         color: white;
     }
 
-        h1 {
-            font-weight: 700;
-            font-size: 2rem;
-        }
     @keyframes gradientBG {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
 
-        /* === Card Box === */
-        .container {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            margin: 20px auto;
-            width: 90%;
-            max-width: 650px;
-            padding: 25px;
-            border-radius: 18px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
-        }
     /* Card container */
     .card {
         width: 95%;
@@ -91,24 +48,11 @@ Original file line number	Diff line number	Diff line change
         animation: fadeIn 1.2s ease;
     }
 
-        .input-box {
-            width: 100%;
-            display: flex;
-            gap: 10px;
-        }
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-        input {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            font-size: 1rem;
-            border-radius: 12px;
-            outline: none;
-        }
     h1 {
         font-size: 2.4rem;
         text-align: center;
@@ -117,16 +61,6 @@ Original file line number	Diff line number	Diff line change
         text-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
 
-        button {
-            padding: 14px 22px;
-            border: none;
-            background: #ff00c8;
-            color: white;
-            border-radius: 12px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
     p.subtext {
         text-align: center;
         opacity: .85;
@@ -134,9 +68,6 @@ Original file line number	Diff line number	Diff line change
         font-size: 1rem;
     }
 
-        button:hover {
-            opacity: 0.8;
-        }
     .input-box {
         display: flex;
         width: 100%;
@@ -147,10 +78,6 @@ Original file line number	Diff line number	Diff line change
         box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
     }
 
-        .download-section {
-            text-align: center;
-            margin-top: 20px;
-        }
     input {
         flex: 1;
         padding: 14px 18px;
@@ -161,27 +88,10 @@ Original file line number	Diff line number	Diff line change
         color: white;
     }
 
-        .download-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 14px 22px;
-            background: #00ffcc;
-            color: #000;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-        }
     input::placeholder {
         color: rgba(255,255,255,0.75);
     }
 
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 20px;
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
     button {
         margin-top: 20px;
         width: 100%;
@@ -197,19 +107,17 @@ Original file line number	Diff line number	Diff line change
         box-shadow: 0 8px 25px rgba(0,0,0,0.25);
     }
 
-        @media (max-width: 480px) {
-            h1 { font-size: 1.6rem; }
-        }
-    </style>
     button:hover {
         transform: translateY(-2px);
         box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         opacity: 0.9;
     }
+
     .result-area {
         text-align: center;
         margin-top: 25px;
     }
+
     .download-btn {
         display: inline-block;
         padding: 15px 25px;
@@ -221,6 +129,7 @@ Original file line number	Diff line number	Diff line change
         box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         animation: fadeIn 0.6s ease;
     }
+
     footer {
         margin-top: auto;
         text-align: center;
@@ -228,53 +137,47 @@ Original file line number	Diff line number	Diff line change
         opacity: 0.7;
         font-size: 0.9rem;
     }
+
 </style>
 </head>
 
 <body>
-    <header>
-        <h1>Download Video TikTok & Facebook</h1>
-    </header>
 
-    <div class="container">
     <h1>Video Downloader</h1>
     <p class="subtext">Download video TikTok & Facebook Reels tanpa watermark</p>
+
     <div class="card">
         <div class="input-box">
-            <input id="url" placeholder="Tempel tautan video di sini...">
             <input id="url" placeholder="Tempel link video di sini...">
         </div>
-        <button onclick="processDownload()">Download</button>
         <button onclick="processDownload()">Download Sekarang</button>
 
-        <div id="result" class="download-section"></div>
         <div class="result-area" id="result"></div>
     </div>
 
-    <footer>
-        © 2025 Video Downloader – Bebas digunakan
-    </footer>
     <footer>© 2025 Calista Downloader • All rights reserved</footer>
+
+
 
 <script>
 async function processDownload() {
-@@ -127,17 +169,24 @@ <h1>Download Video TikTok & Facebook</h1>
+    const link = document.getElementById("url").value;
+    const result = document.getElementById("result");
+
+    if (!link) {
+        result.innerHTML = "<p>Masukkan URL terlebih dahulu.</p>";
         return;
     }
 
-    result.innerHTML = "<p>Memproses...</p>";
     result.innerHTML = "<p>Sedang memproses...</p>";
 
-    // Auto detect platform
-    let API = "";
     let API;
 
     // TikTok
     if (link.includes("tiktok.com")) {
         API = "https://tikwm.com/api/?url=" + encodeURIComponent(link);
     }
-    else if (link.includes("facebook.com") || link.includes("fb.watch")) {
-        API = "https://api.savefb.app/api/download?url=" + encodeURIComponent(link);
+
     // Facebook Reels + FB video
     else if (
         link.includes("facebook.com") ||
@@ -283,20 +186,17 @@ async function processDownload() {
     ) {
         API = "https://api.yt5s.workers.dev/facebook?url=" + encodeURIComponent(link);
     }
+
     else {
         result.innerHTML = "<p>URL tidak dikenali. Harus TikTok atau Facebook.</p>";
         return;
-@@ -147,26 +196,23 @@ <h1>Download Video TikTok & Facebook</h1>
+    }
+
+    try {
         const res = await fetch(API);
         const data = await res.json();
 
-        let video;
         // TikTok
-        if (data.data?.play) video = data.data.play;
-        // Facebook
-        if (!video && data.data?.url) video = data.data.url;
-        if (!video && data.data?.sd) video = data.data.sd;
-        if (!video && data.data?.hd) video = data.data.hd;
         if (data.data?.play) {
             result.innerHTML = `
                 <a class="download-btn" href="${data.data.play}" target="_blank">Download Video TikTok</a>
@@ -304,8 +204,6 @@ async function processDownload() {
             return;
         }
 
-        if (!video) {
-            result.innerHTML = "<p>Gagal mengambil video.</p>";
         // Facebook Reels
         if (data.download_url) {
             result.innerHTML = `
@@ -314,12 +212,13 @@ async function processDownload() {
             return;
         }
 
-        result.innerHTML = `
-            <a class="download-link" href="${video}" target="_blank">
-                Klik di sini untuk download video
-            </a>
-        `;
         result.innerHTML = "<p>Gagal mengambil video.</p>";
 
     } catch (e) {
         result.innerHTML = "<p>Terjadi kesalahan saat memproses.</p>";
+    }
+}
+</script>
+
+</body>
+</html>
