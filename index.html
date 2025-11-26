@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok & Facebook Downloader</title>
+    <style>
+        body { font-family: Arial; background: #6a00ff; color: white; text-align: center; padding: 40px; }
+        input { width: 80%; padding: 10px; border-radius: 10px; border: none; margin-top: 20px; }
+        button { padding: 12px 25px; border: none; background: #ff00c8; color: white; margin-top: 20px; border-radius: 10px; cursor: pointer; }
+        a { color: yellow; display: block; margin-top: 20px; font-size: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Downloader TikTok & Facebook</h1>
+
+    <input id="url" placeholder="Tempel URL TikTok / Facebook">
+    <button onclick="downloadVideo()">Download</button>
+
+    <div id="result"></div>
+
+<script>
+async function downloadVideo() {
+    const link = document.getElementById("url").value;
+    const result = document.getElementById("result");
+    result.innerHTML = "Memproses...";
+
+    let apiURL = "";
+
+    if (link.includes("tiktok.com")) {
+        apiURL = "https://tikwm.com/api/?url=" + encodeURIComponent(link);
+    } 
+    else if (link.includes("facebook.com") || link.includes("fb.watch")) {
+        apiURL = "https://api.savefb.app/api/download?url=" + encodeURIComponent(link);
+    } 
+    else {
+        result.innerHTML = "URL tidak valid!";
+        return;
+    }
+
+    const response = await fetch(apiURL);
+    const data = await response.json();
+
+    if (data && data.data) {
+        const video = data.data.play || data.data.url || data.data.sd || data.data.hd;
+        result.innerHTML = `<a href="${video}" target="_blank">Klik untuk Download Video</a>`;
+    } else {
+        result.innerHTML = "Gagal mengambil video.";
+    }
+}
+</script>
+</body>
+</html>
