@@ -78,7 +78,8 @@
         box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
     }
 
-    input {
+    /* KOTAK INPUT BERUBAH MENJADI TEXTAREA MULTILINE */
+textarea {
     flex: 1;
     padding: 14px 18px;
     font-size: 1rem;
@@ -87,20 +88,30 @@
     background: transparent;
     color: white;
 
-    /* 🔥 FIX teks terlalu panjang */
-    white-space: nowrap;
-    overflow-x: auto;
-    text-overflow: ellipsis;
-    scrollbar-width: none; /* Firefox */
+    /* fix agar teks membungkus dan tidak keluar */
+    white-space: normal;
+    word-break: break-word;
+
+    /* tidak boleh resize manual */
+    resize: none;
+
+    /* auto height, biar nanti JS bisa expand */
+    overflow-y: hidden;
+    height: auto;
+
+    /* tampilan tetap elegan */
+    font-family: inherit;
 }
 
-    input::-webkit-scrollbar {
-        display: none; /* Safari / Chrome / iPhone */
+/* sembunyikan scrollbar di iPhone, Chrome, Safari */
+textarea::-webkit-scrollbar {
+    display: none;
 }
 
-    input::placeholder {
-        color: rgba(255,255,255,0.75);
-    }
+/* placeholder */
+textarea::placeholder {
+    color: rgba(255,255,255,0.75);
+}
 
     button {
         margin-top: 20px;
@@ -158,7 +169,7 @@
 
     <div class="card">
         <div class="input-box">
-            <input id="url" placeholder="Tempel link video di sini...">
+            <textarea id="url" placeholder="Tempel link video di sini..." rows="2"></textarea>
         </div>
         <button onclick="processDownload()">Download Sekarang</button>
 
