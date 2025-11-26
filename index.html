@@ -1,223 +1,193 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Downloader TikTok & Facebook</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calista Video Downloader</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
-
     body {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585);
-        background-size: 400% 400%;
-        animation: gradientBG 12s ease infinite;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 40px 20px;
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a00ff, #c400ff);
         color: white;
-    }
-
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Card container */
-    .card {
-        width: 95%;
-        max-width: 700px;
-        background: rgba(255,255,255,0.12);
-        border-radius: 22px;
-        padding: 30px;
-        margin-top: 20px;
-        backdrop-filter: blur(15px);
-        box-shadow: 0 10px 50px rgba(0,0,0,0.3);
-        border: 1px solid rgba(255,255,255,0.2);
-        animation: fadeIn 1.2s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        text-align: center;
+        padding: 40px 20px;
     }
 
     h1 {
-        font-size: 2.4rem;
-        text-align: center;
-        margin-bottom: 10px;
+        font-size: 2.6rem;
         font-weight: 700;
-        text-shadow: 0 0 15px rgba(0,0,0,0.4);
+        margin-bottom: 10px;
     }
 
-    p.subtext {
-        text-align: center;
-        opacity: .85;
-        margin-bottom: 25px;
-        font-size: 1rem;
+    p.subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 40px;
     }
 
-    .input-box {
+    .box {
+        background: rgba(255,255,255,0.08);
+        padding: 35px;
+        border-radius: 25px;
+        max-width: 600px;
+        margin: auto;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .input-wrapper {
+        background: rgba(255,255,255,0.12);
+        border-radius: 18px;
+        padding: 12px 18px;
         display: flex;
-        width: 100%;
-        background: rgba(255,255,255,0.15);
-        border-radius: 14px;
-        padding: 12px;
-        border: 1px solid rgba(255,255,255,0.25);
-        box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        align-items: center;
+        margin-bottom: 20px;
     }
 
     input {
         flex: 1;
-        padding: 14px 18px;
+        padding: 12px;
         font-size: 1rem;
-        outline: none;
         border: none;
         background: transparent;
+        outline: none;
         color: white;
-    }
 
-    input::placeholder {
-        color: rgba(255,255,255,0.75);
+        /* 🔥 FIX overflow panjang */
+        white-space: nowrap;
+        overflow-x: auto;
+        text-overflow: ellipsis;
+        scrollbar-width: none;
     }
-
-    button {
-        margin-top: 20px;
-        width: 100%;
-        padding: 16px;
-        border: none;
-        background: linear-gradient(45deg, #ff0099, #6a00ff);
-        color: white;
-        border-radius: 14px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.25s;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-    }
-
-    button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-        opacity: 0.9;
-    }
-
-    .result-area {
-        text-align: center;
-        margin-top: 25px;
+    input::-webkit-scrollbar {
+        display: none;
     }
 
     .download-btn {
-        display: inline-block;
-        padding: 15px 25px;
-        background: #00f5d4;
-        color: #000;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 700;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        animation: fadeIn 0.6s ease;
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 18px;
+        color: white;
+        background: linear-gradient(90deg, #ff0095, #8a00ff);
+        cursor: pointer;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.2);
+        transition: 0.2s;
+    }
+
+    .download-btn:active {
+        transform: scale(0.96);
+    }
+
+    .message {
+        margin-top: 18px;
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+
+    /* Loading Spinner */
+    .loader {
+        width: 40px;
+        height: 40px;
+        border: 4px solid white;
+        border-top-color: transparent;
+        border-radius: 50%;
+        margin: 20px auto;
+        animation: spin 1s linear infinite;
+        display: none;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
     }
 
     footer {
-        margin-top: auto;
-        text-align: center;
-        padding: 20px;
+        margin-top: 60px;
         opacity: 0.7;
         font-size: 0.9rem;
     }
-
 </style>
 </head>
 
 <body>
 
-    <h1>Video Downloader</h1>
-    <p class="subtext">Download video TikTok & Facebook Reels tanpa watermark</p>
+<h1>Video Downloader</h1>
+<p class="subtitle">Download video TikTok & Facebook Reels tanpa watermark</p>
 
-    <div class="card">
-        <div class="input-box">
-            <input id="url" placeholder="Tempel link video di sini...">
-        </div>
-        <button onclick="processDownload()">Download Sekarang</button>
-
-        <div class="result-area" id="result"></div>
+<div class="box">
+    <div class="input-wrapper">
+        <input id="inputLink" type="text" placeholder="Tempel link video di sini...">
     </div>
 
-    <footer>© 2025 Calista Downloader • All rights reserved</footer>
+    <button class="download-btn" onclick="startDownload()">Download Sekarang</button>
 
+    <div class="loader" id="loader"></div>
+
+    <div class="message" id="message"></div>
+</div>
+
+<footer>
+    © 2025 Calista Downloader • All rights reserved
+</footer>
 
 
 <script>
-async function processDownload() {
-    const link = document.getElementById("url").value;
-    const result = document.getElementById("result");
 
-    if (!link) {
-        result.innerHTML = "<p>Masukkan URL terlebih dahulu.</p>";
+function fixFacebookShareLink(url) {
+    const sharePattern = /facebook\.com\/share\/r\/([A-Za-z0-9]+)/;
+    const match = url.match(sharePattern);
+
+    if (match) {
+        const id = match[1];
+        return `https://www.facebook.com/reel/${id}/`;
+    }
+
+    return url;
+}
+
+async function startDownload() {
+    const input = document.getElementById("inputLink");
+    const message = document.getElementById("message");
+    const loader = document.getElementById("loader");
+
+    let url = input.value.trim();
+    if (!url) {
+        message.textContent = "Harap masukkan link terlebih dahulu.";
         return;
     }
 
-    result.innerHTML = "<p>Sedang memproses...</p>";
+    // 🔥 Auto convert share link Facebook
+    url = fixFacebookShareLink(url);
 
-    let API;
-
-    // TikTok
-    if (link.includes("tiktok.com")) {
-        API = "https://tikwm.com/api/?url=" + encodeURIComponent(link);
-    }
-
-    // Facebook Reels + FB video
-    else if (
-        link.includes("facebook.com") ||
-        link.includes("fb.watch") ||
-        link.includes("/reel/")
-    ) {
-        API = "https://api.yt5s.workers.dev/facebook?url=" + encodeURIComponent(link);
-    }
-
-    else {
-        result.innerHTML = "<p>URL tidak dikenali. Harus TikTok atau Facebook.</p>";
-        return;
-    }
+    loader.style.display = "block";
+    message.textContent = "";
 
     try {
-        const res = await fetch(API);
+        const res = await fetch(`https://api.ryzendesu.vip/api/downloader/all?url=${encodeURIComponent(url)}`);
         const data = await res.json();
 
-        // TikTok
-        if (data.data?.play) {
-            result.innerHTML = `
-                <a class="download-btn" href="${data.data.play}" target="_blank">Download Video TikTok</a>
-            `;
+        loader.style.display = "none";
+
+        if (!data.status) {
+            message.textContent = "Terjadi kesalahan saat memproses.";
             return;
         }
 
-        // Facebook Reels
-        if (data.download_url) {
-            result.innerHTML = `
-                <a class="download-btn" href="${data.download_url}" target="_blank">Download Reels Facebook</a>
-            `;
-            return;
-        }
-
-        result.innerHTML = "<p>Gagal mengambil video.</p>";
-
-    } catch (e) {
-        result.innerHTML = "<p>Terjadi kesalahan saat memproses.</p>";
+        window.location.href = data.result.url; // Auto download
+        message.textContent = "Berhasil! Mengunduh...";
+    } 
+    catch (e) {
+        loader.style.display = "none";
+        message.textContent = "Gagal menghubungi server.";
     }
 }
+
 </script>
 
 </body>
