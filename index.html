@@ -3,51 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTok & Facebook Downloader</title>
+    <title>Downloader TikTok & Facebook</title>
+
     <style>
-        body { font-family: Arial; background: #6a00ff; color: white; text-align: center; padding: 40px; }
-        input { width: 80%; padding: 10px; border-radius: 10px; border: none; margin-top: 20px; }
-        button { padding: 12px 25px; border: none; background: #ff00c8; color: white; margin-top: 20px; border-radius: 10px; cursor: pointer; }
-        a { color: yellow; display: block; margin-top: 20px; font-size: 20px; }
+        /* === Global Theme === */
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #4d00ff, #ff00c8);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        header {
+            padding: 40px 20px 10px;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        /* === Card Box === */
+        .container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 650px;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+        }
+
+        .input-box {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            font-size: 1rem;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        button {
+            padding: 14px 22px;
+            border: none;
+            background: #ff00c8;
+            color: white;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .download-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 14px 22px;
+            background: #00ffcc;
+            color: #000;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+        }
     </style>
 </head>
+
 <body>
-    <h1>Downloader TikTok & Facebook</h1>
+    <header>
+        <h1>Download Video TikTok & Facebook</h1>
+    </header>
 
-    <input id="url" placeholder="Tempel URL TikTok / Facebook">
-    <button onclick="downloadVideo()">Download</button>
+    <div class="container">
+        <div class="input-box">
+            <input id="url" placeholder="Tempel tautan video di sini...">
+        </div>
+        <button onclick="processDownload()">Download</button>
 
-    <div id="result"></div>
+        <div id="result" class="download-section"></div>
+    </div>
+
+    <footer>
+        © 2025 Video Downloader – Bebas digunakan
+    </footer>
 
 <script>
-async function downloadVideo() {
+async function processDownload() {
     const link = document.getElementById("url").value;
     const result = document.getElementById("result");
-    result.innerHTML = "Memproses...";
 
-    let apiURL = "";
-
-    if (link.includes("tiktok.com")) {
-        apiURL = "https://tikwm.com/api/?url=" + encodeURIComponent(link);
-    } 
-    else if (link.includes("facebook.com") || link.includes("fb.watch")) {
-        apiURL = "https://api.savefb.app/api/download?url=" + encodeURIComponent(link);
-    } 
-    else {
-        result.innerHTML = "URL tidak valid!";
+    if (!link) {
+        result.innerHTML = "<p>Masukkan URL terlebih dahulu.</p>";
         return;
     }
 
-    const response = await fetch(apiURL);
-    const data = await response.json();
+    result.innerHTML = "<p>Memproses...</p>";
 
-    if (data && data.data) {
-        const video = data.data.play || data.data.url || data.data.sd || data.data.hd;
-        result.innerHTML = `<a href="${video}" target="_blank">Klik untuk Download Video</a>`;
-    } else {
-        result.innerHTML = "Gagal mengambil video.";
+    // Auto detect platform
+    let API = "";
+
+    if (link.includes("tiktok.com")) {
+        API = "https://tikwm.com/api/?url=" + encodeURIComponent(link);
+    }
+    else if (link.includes("facebook.com") || link.includes("fb.watch")) {
+        API = "https://api.savefb.app/api/download?url=" + encodeURIComponent(link);
+    }
+    else {
+        result.innerHTML = "<p>URL tidak dikenali. Harus TikTok atau Facebook.</p>";
+        return;
+    }
+
+    try {
+        const res = await fetch(API);
+        const data = await res.json();
+
+        let video;
+
+        // TikTok
+        if (data.data?.play) video = data.data.play;
+
+        // Facebook
+        if (!video && data.data?.url) video = data.data.url;
+        if (!video && data.data?.sd) video = data.data.sd;
+        if (!video && data.data?.hd) video = data.data.hd;
+
+        if (!video) {
+            result.innerHTML = "<p>Gagal mengambil video.</p>";
+            return;
+        }
+
+        result.innerHTML = `
+            <a class="download-link" href="${video}" target="_blank">
+                Klik di sini untuk download video
+            </a>
+        `;
+
+    } catch (e) {
+        result.innerHTML = "<p>Terjadi kesalahan saat memproses.</p>";
     }
 }
 </script>
+
 </body>
 </html>
